@@ -9,22 +9,23 @@ export interface Props {
   className?: string;
   onClick?: () => void;
   nodeId?: Types.NodeId;
-  isNodeIdPinned?: () => boolean;
+  nodeName?: Types.NodeName;
+  isNodeNamePinned?: () => boolean;
 };
 
 export class Icon extends React.Component<{}, Props> {
   public props: Props;
 
   public shouldComponentUpdate(nextProps: any, nextState: any) {
-    const { nodeId, isNodeIdPinned } = this.props;
+    const { nodeName, isNodeNamePinned } = this.props;
 
-    if (!nodeId || !nextProps.hasOwnProperty('isNodeIdPinned' || typeof nextProps.isNodeIdPinned === 'undefined')) {
+    if (!nodeName || !nextProps.hasOwnProperty('isNodeNamePinned' || typeof nextProps.isNodeNamePinned === 'undefined')) {
       return false;
     }
 
-    console.log('isNodeIdPinned vs nextProps.nodesPinned.get(nodeId)', isNodeIdPinned, nextProps.isNodeIdPinned, typeof nextProps.isNodeIdPinned === 'undefined');
+    console.log('isNodeNamePinned vs nextProps.nodesPinned.get(nodeName)', isNodeNamePinned, nextProps.isNodeNamePinned, typeof nextProps.isNodeNamePinned === 'undefined');
 
-    if (isNodeIdPinned !== nextProps.isNodeIdPinned) {
+    if (isNodeNamePinned !== nextProps.isNodeNamePinned) {
       return true;
     }
 
@@ -32,8 +33,8 @@ export class Icon extends React.Component<{}, Props> {
   }
 
   public render() {
-    const { alt, className, onClick, src, isNodeIdPinned } = this.props;
+    const { alt, className, onClick, src, isNodeNamePinned } = this.props;
 
-    return <ReactSVG title={alt} className={`${isNodeIdPinned ? 'IconPurple' : 'Icon'} ${ className || '' }`} path={src} onClick={onClick} />;
+    return <ReactSVG title={alt} className={`${isNodeNamePinned ? 'IconPurple' : 'Icon'} ${ className || '' }`} path={src} onClick={onClick} />;
   }
 }

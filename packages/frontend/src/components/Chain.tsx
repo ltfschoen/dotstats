@@ -14,6 +14,7 @@ const MAP_HEIGHT_ADJUST = 400 / 350;
 const HEADER = 148;
 
 import './Chain.css';
+import { NodeDetails, NodeName } from '../../../common/src/types';
 
 export namespace Chain {
   export interface Props {
@@ -141,7 +142,7 @@ export class Chain extends React.Component<Chain.Props, Chain.State> {
         <Node.Header />
         <tbody>
         {
-          this.nodes().sort(this.sortNodes).map((node) => <Node.Row key={node.id} {...node} nodesPinned={nodesPinned} handleNodePinClick={handleNodePinClick(node.id)} />)
+          this.nodes().sort(this.sortNodes).map((node) => <Node.Row key={node.id} {...node} nodesPinned={nodesPinned} handleNodePinClick={handleNodePinClick(node.nodeDetails[0])} />)
         }
         </tbody>
       </table>

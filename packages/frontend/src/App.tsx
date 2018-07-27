@@ -84,19 +84,15 @@ export default class App extends React.Component<{}, State> {
     window.removeEventListener('keydown', this.onKeyPress);
   }
 
-  private handleNodePinClick: (id: Types.NodeId) => () => void = (id) => {
+  private handleNodePinClick: (id: Types.NodeId) => () => void = (nodeName) => {
     return () => {
       const { nodesPinned } = this.state;
 
-      // console.log('nodesPinned: ', nodesPinned);
-      // console.log('nodesPinned.size === 0: ', nodesPinned.size === 0);
-      // console.log('nodesPinned.has(id): ', nodesPinned.hasOwnProperty(id));
-
       // set key to true if empty map or key not exist
-      if (nodesPinned.size === 0 || nodesPinned.hasOwnProperty(id) === false) {
+      if (nodesPinned.size === 0 || nodesPinned.hasOwnProperty(nodeName) === false) {
         this.setState((prevState, props) => {
           const newNodesPinned = prevState.nodesPinned;
-          newNodesPinned[id] = true;
+          newNodesPinned[nodeName] = true;
 
           console.log('handle click setting localstorage to: ', newNodesPinned);
 
@@ -111,8 +107,8 @@ export default class App extends React.Component<{}, State> {
       } else {
         this.setState((prevState, props) => {
           const newNodesPinned = prevState.nodesPinned;
-          const existingNodeIdPinnedState = newNodesPinned[id];
-          newNodesPinned[id] = !existingNodeIdPinnedState;
+          const existingNodeIdPinnedState = newNodesPinned[nodeName];
+          newNodesPinned[nodeName] = !existingNodeIdPinnedState;
 
           console.log('toggle to: ', newNodesPinned);
 

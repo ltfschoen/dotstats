@@ -19,19 +19,19 @@ export class Row extends React.Component<Props & PinState & PinHandler> {
     const [name, implementation, version] = this.props.nodeDetails;
     const [height, hash, blockTime, blockTimestamp, propagationTime] = this.props.blockDetails;
     const [peers, txcount] = this.props.nodeStats;
-    const isNodeIdPinned = () => {
-      if (typeof id === 'undefined') {
+    const isNodeNamePinned = () => {
+      if (typeof name === 'undefined') {
         return false;
       }
-      console.log('nodesPinned[id]', nodesPinned[id])
-      return nodesPinned[id] || false;
+      console.log('nodesPinned[name]', nodesPinned[name])
+      return nodesPinned[name] || false;
     }
 
-    console.log('id, nodesPinned', id, nodesPinned);
+    console.log('id, name, nodesPinned', id, name, nodesPinned);
 
     return (
       <tr>
-        <td><span onClick={this.props.handleNodePinClick}><Icon src={heartIcon} alt="Pin Node" nodeId={id} isNodeIdPinned={isNodeIdPinned()} /></span></td>
+        <td><span onClick={this.props.handleNodePinClick}><Icon src={heartIcon} alt="Pin Node" nodeId={id} nodeName={name} isNodeNamePinned={isNodeNamePinned()} /></span></td>
         <td>{name}</td>
         <td>{implementation} v{version}</td>
         <td>{peers}</td>
